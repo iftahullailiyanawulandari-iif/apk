@@ -850,3 +850,61 @@ class MapsTab extends StatelessWidget {
       ),
     );
   }
+  Widget _buildBranchCard(String name, String address, String status, String hours, String distance, bool isNearest) {
+    return Container(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(16),
+        boxShadow: [
+          BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 10, offset: const Offset(0, 5)),
+        ],
+      ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            padding: const EdgeInsets.all(2),
+            decoration: const BoxDecoration(color: Colors.green, shape: BoxShape.circle),
+            child: Container(width: 8, height: 8, decoration: const BoxDecoration(color: Colors.white, shape: BoxShape.circle)),
+          ),
+          const SizedBox(width: 16),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(name, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+                    Text(distance, style: const TextStyle(color: Colors.grey, fontSize: 12)),
+                  ],
+                ),
+                const SizedBox(height: 4),
+                Text(address, style: const TextStyle(color: Colors.grey, fontSize: 12)),
+                const SizedBox(height: 8),
+                Row(
+                  children: [
+                    Text(status, style: const TextStyle(color: Colors.green, fontWeight: FontWeight.bold, fontSize: 12)),
+                    const SizedBox(width: 8),
+                    Text('• $hours', style: const TextStyle(color: Colors.grey, fontSize: 12)),
+                  ],
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(width: 16),
+          ElevatedButton(
+            onPressed: () {},
+            style: ElevatedButton.styleFrom(
+              backgroundColor: const Color(0xFF1E88E5),
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              minimumSize: Size.zero,
+            ),
+            child: const Text('Rute', style: TextStyle(color: Colors.white)),
+          ),
+        ],
+      ),
+    );
+  }
