@@ -92,3 +92,58 @@ class _MainScreenState extends State<MainScreen> {
 // ---------------------------------------------------------
 class HomeTab extends StatelessWidget {
   const HomeTab({super.key});
+@override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: const Color(0xFFF8F9FA),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            // Blue Header Section
+            Stack(
+              clipBehavior: Clip.none,
+              children: [
+                Container(
+                  padding: const EdgeInsets.only(top: 60, left: 24, right: 24, bottom: 60),
+                  decoration: const BoxDecoration(
+                    color: Color(0xFF1E88E5),
+                    borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(30),
+                      bottomRight: Radius.circular(30),
+                    ),
+                  ),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Smart\nLaundry Hub',
+                              style: TextStyle(color: Colors.white, fontSize: 28, fontWeight: FontWeight.bold, height: 1.2),
+                            ),
+                            SizedBox(height: 12),
+                            Text(
+                              'Kelola cucian jadi lebih mudah\ncepat & praktis',
+                              style: TextStyle(color: Colors.white70, fontSize: 14),
+                            ),
+                            SizedBox(height: 20),
+                          ],
+                        ),
+                      ),
+                      // Notification Bell
+                      Container(
+                        decoration: BoxDecoration(color: Colors.white.withOpacity(0.2), shape: BoxShape.circle),
+                        child: IconButton(
+                          icon: const Badge(
+                            label: Text('2'),
+                            backgroundColor: Colors.red,
+                            child: Icon(Icons.notifications_none, color: Colors.white),
+                          ),
+                          onPressed: () {},
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
