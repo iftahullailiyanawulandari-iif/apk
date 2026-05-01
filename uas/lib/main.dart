@@ -579,3 +579,80 @@ class _CalculatorTabState extends State<CalculatorTab> {
                       const SizedBox(width: 8),
                       const Text('kg', style: TextStyle(color: Colors.grey, fontSize: 16)),
                     ],
+                     ),
+                  IconButton(
+                    icon: const Icon(Icons.add),
+                    onPressed: () => setState(() => weight++),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 24),
+
+            const Text('Jenis Cucian', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+            const SizedBox(height: 12),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(12),
+                border: Border.all(color: Colors.grey[300]!),
+              ),
+              child: DropdownButtonHideUnderline(
+                child: DropdownButton<String>(
+                  value: serviceType,
+                  isExpanded: true,
+                  items: ['Cucian Biasa', 'Cuci Kering', 'Setrika Saja'].map((String value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(value),
+                    );
+                  }).toList(),
+                  onChanged: (newValue) {
+                    if(newValue != null) {
+                      setState(() {
+                        serviceType = newValue;
+                      });
+                    }
+                  },
+                ),
+              ),
+            ),
+            const SizedBox(height: 32),
+
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.all(24),
+              decoration: BoxDecoration(
+                color: const Color(0xFFE3F2FD),
+                borderRadius: BorderRadius.circular(16),
+              ),
+              child: Column(
+                children: [
+                  const Text('Total Harga', style: TextStyle(color: Color(0xFF1E88E5), fontWeight: FontWeight.bold)),
+                  const SizedBox(height: 8),
+                  Text('Rp ${weight * 7000}', style: const TextStyle(color: Color(0xFF1E88E5), fontSize: 32, fontWeight: FontWeight.bold)),
+                ],
+              ),
+            ),
+            const SizedBox(height: 32),
+
+            SizedBox(
+              width: double.infinity,
+              child: ElevatedButton(
+                onPressed: () {},
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xFF1E88E5),
+                  padding: const EdgeInsets.symmetric(vertical: 16),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                  elevation: 0,
+                ),
+                child: const Text('Simpan Order', style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold)),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
