@@ -740,3 +740,113 @@ class HistoryTab extends StatelessWidget {
       ),
     );
   }
+  Widget _buildBar(double height) {
+    return Container(
+      width: 8,
+      height: height,
+      margin: const EdgeInsets.symmetric(horizontal: 2),
+      decoration: BoxDecoration(
+        color: const Color(0xFF1E88E5),
+        borderRadius: BorderRadius.circular(4),
+      ),
+    );
+  }
+
+  Widget _buildHistoryItem(String date, String orderId, String weight, String price) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 12),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(date, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
+              const SizedBox(height: 4),
+              Text(orderId, style: const TextStyle(color: Colors.grey, fontSize: 12)),
+            ],
+          ),
+          Text(weight, style: const TextStyle(color: Colors.grey, fontSize: 14)),
+          Text(price, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
+        ],
+      ),
+    );
+  }
+}
+
+// ---------------------------------------------------------
+// 5. MAPS TAB
+// ---------------------------------------------------------
+class MapsTab extends StatelessWidget {
+  const MapsTab({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: const Color(0xFFF8F9FA),
+      appBar: AppBar(
+        title: const Text('Lokasi Laundry', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+        centerTitle: true,
+        backgroundColor: Colors.white,
+        elevation: 0,
+        leading: IconButton(icon: const Icon(Icons.arrow_back, color: Colors.black), onPressed: () {}),
+      ),
+      body: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(12),
+                boxShadow: [
+                  BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 10, offset: const Offset(0, 5)),
+                ],
+              ),
+              child: const TextField(
+                decoration: InputDecoration(
+                  icon: Icon(Icons.search, color: Colors.grey),
+                  hintText: 'Cari cabang laundry',
+                  border: InputBorder.none,
+                ),
+              ),
+            ),
+          ),
+          // Mock Map Area
+          Container(
+            height: 250,
+            width: double.infinity,
+            color: Colors.grey[300], // Mock Map background
+            child: Stack(
+              children: [
+                const Positioned(top: 50, left: 100, child: Icon(Icons.location_on, color: Color(0xFF1E88E5), size: 40)),
+                const Positioned(top: 150, left: 200, child: Icon(Icons.location_on, color: Color(0xFF1E88E5), size: 40)),
+                const Positioned(top: 100, left: 250, child: Icon(Icons.location_on, color: Color(0xFF1E88E5), size: 40)),
+                Positioned(
+                  bottom: 16,
+                  right: 16,
+                  child: FloatingActionButton(
+                    mini: true,
+                    backgroundColor: Colors.white,
+                    onPressed: () {},
+                    child: const Icon(Icons.my_location, color: Colors.black),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Expanded(
+            child: ListView(
+              padding: const EdgeInsets.all(16),
+              children: [
+                _buildBranchCard('Laundry Cabang A', 'Jl. Merdeka No. 10, Kota Anda', 'Buka', '07.00 - 21.00', '500 m', true),
+                const SizedBox(height: 12),
+                _buildBranchCard('Laundry Cabang B', 'Jl. Sudirman No. 45, Kota Anda', 'Buka', '07.00 - 21.00', '1.2 km', false),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
