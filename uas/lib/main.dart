@@ -453,3 +453,129 @@ class TrackingTab extends StatelessWidget {
       ],
     );
   }
+  Widget _buildTimelineStep(String label, bool isActive) {
+    return Column(
+      children: [
+        Container(
+          width: 16,
+          height: 16,
+          decoration: BoxDecoration(
+            color: isActive ? const Color(0xFF1E88E5) : Colors.grey[300],
+            shape: BoxShape.circle,
+            border: isActive ? Border.all(color: Colors.white, width: 2) : null,
+            boxShadow: isActive ? [BoxShadow(color: const Color(0xFF1E88E5).withOpacity(0.4), blurRadius: 4)] : null,
+          ),
+        ),
+        const SizedBox(height: 8),
+        Text(label, style: TextStyle(color: isActive ? Colors.black87 : Colors.grey, fontSize: 10, fontWeight: isActive ? FontWeight.bold : FontWeight.normal)),
+      ],
+    );
+  }
+
+  Widget _buildTimelineDivider(bool isActive) {
+    return Expanded(
+      child: Container(
+        height: 2,
+        margin: const EdgeInsets.only(bottom: 20),
+        color: isActive ? const Color(0xFF1E88E5) : Colors.grey[300],
+      ),
+    );
+  }
+}
+
+// ---------------------------------------------------------
+// 3. CALCULATOR TAB
+// ---------------------------------------------------------
+class CalculatorTab extends StatefulWidget {
+  const CalculatorTab({super.key});
+
+  @override
+  State<CalculatorTab> createState() => _CalculatorTabState();
+}
+
+class _CalculatorTabState extends State<CalculatorTab> {
+  int weight = 3;
+  String type = 'Kiloan';
+  String serviceType = 'Cucian Biasa';
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: const Color(0xFFF8F9FA),
+      appBar: AppBar(
+        title: const Text('Kalkulator Harga', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+        centerTitle: true,
+        backgroundColor: Colors.white,
+        elevation: 0,
+        leading: IconButton(icon: const Icon(Icons.arrow_back, color: Colors.black), onPressed: () {}),
+      ),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(24),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text('Jenis Layanan', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+            const SizedBox(height: 12),
+            Row(
+              children: [
+                Expanded(
+                  child: ElevatedButton.icon(
+                    onPressed: () => setState(() => type = 'Kiloan'),
+                    icon: Icon(Icons.scale, color: type == 'Kiloan' ? Colors.white : Colors.grey),
+                    label: Text('Kiloan', style: TextStyle(color: type == 'Kiloan' ? Colors.white : Colors.black87)),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: type == 'Kiloan' ? const Color(0xFF1E88E5) : Colors.white,
+                      elevation: 0,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                        side: BorderSide(color: type == 'Kiloan' ? Colors.transparent : Colors.grey[300]!),
+                      ),
+                      padding: const EdgeInsets.symmetric(vertical: 12),
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 16),
+                Expanded(
+                  child: ElevatedButton.icon(
+                    onPressed: () => setState(() => type = 'Satuan'),
+                    icon: Icon(Icons.checkroom, color: type == 'Satuan' ? Colors.white : Colors.grey),
+                    label: Text('Satuan', style: TextStyle(color: type == 'Satuan' ? Colors.white : Colors.black87)),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: type == 'Satuan' ? const Color(0xFF1E88E5) : Colors.white,
+                      elevation: 0,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                        side: BorderSide(color: type == 'Satuan' ? Colors.transparent : Colors.grey[300]!),
+                      ),
+                      padding: const EdgeInsets.symmetric(vertical: 12),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 24),
+            
+            const Text('Berat Cucian', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+            const SizedBox(height: 12),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(12),
+                border: Border.all(color: Colors.grey[300]!),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  IconButton(
+                    icon: const Icon(Icons.remove),
+                    onPressed: () {
+                      if (weight > 1) setState(() => weight--);
+                    },
+                  ),
+                  Row(
+                    children: [
+                      Text('$weight', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                      const SizedBox(width: 8),
+                      const Text('kg', style: TextStyle(color: Colors.grey, fontSize: 16)),
+                    ],
