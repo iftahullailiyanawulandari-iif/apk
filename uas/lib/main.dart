@@ -656,3 +656,87 @@ class _CalculatorTabState extends State<CalculatorTab> {
     );
   }
 }
+// ---------------------------------------------------------
+// 4. HISTORY TAB
+// ---------------------------------------------------------
+class HistoryTab extends StatelessWidget {
+  const HistoryTab({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: const Color(0xFFF8F9FA),
+      appBar: AppBar(
+        title: const Text('Riwayat Transaksi', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+        centerTitle: true,
+        backgroundColor: Colors.white,
+        elevation: 0,
+        leading: IconButton(icon: const Icon(Icons.arrow_back, color: Colors.black), onPressed: () {}),
+        actions: [
+          IconButton(icon: const Icon(Icons.calendar_today, color: Colors.black), onPressed: () {}),
+        ],
+      ),
+      body: ListView(
+        padding: const EdgeInsets.all(24),
+        children: [
+          Align(
+            alignment: Alignment.centerLeft,
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(20),
+                border: Border.all(color: Colors.grey[300]!),
+              ),
+              child: const Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text('April 2026', style: TextStyle(fontWeight: FontWeight.bold)),
+                  SizedBox(width: 4),
+                  Icon(Icons.arrow_drop_down),
+                ],
+              ),
+            ),
+          ),
+          const SizedBox(height: 24),
+          Container(
+            padding: const EdgeInsets.all(24),
+            decoration: BoxDecoration(
+              color: const Color(0xFFE3F2FD),
+              borderRadius: BorderRadius.circular(16),
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('Total Pengeluaran', style: TextStyle(color: Colors.grey)),
+                    SizedBox(height: 8),
+                    Text('Rp 150.000', style: TextStyle(color: Color(0xFF1E88E5), fontSize: 24, fontWeight: FontWeight.bold)),
+                  ],
+                ),
+                // Simple placeholder for chart
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    _buildBar(20),
+                    _buildBar(40),
+                    _buildBar(30),
+                    _buildBar(50),
+                    _buildBar(10),
+                  ],
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: 24),
+          _buildHistoryItem('12 Apr 2026', 'Order #003', '3 kg', 'Rp 21.000'),
+          const Divider(),
+          _buildHistoryItem('10 Apr 2026', 'Order #002', '2 kg', 'Rp 14.000'),
+          const Divider(),
+          _buildHistoryItem('08 Apr 2026', 'Order #001', '1.5 kg', 'Rp 10.500'),
+        ],
+      ),
+    );
+  }
