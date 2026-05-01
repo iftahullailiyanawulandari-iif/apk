@@ -347,3 +347,109 @@ class TrackingTab extends StatelessWidget {
                   iconColor: Colors.blue,
                 ),
                 const SizedBox(height: 16),
+                  _buildTrackingCard(
+                  orderId: 'Order #002',
+                  date: '12 Apr 2026, 10:15',
+                  status: 'Dijemur',
+                  statusColor: Colors.orange,
+                  step: 2,
+                  iconColor: Colors.orange,
+                ),
+                const SizedBox(height: 16),
+                _buildTrackingCard(
+                  orderId: 'Order #003',
+                  date: '11 Apr 2026, 16:20',
+                  status: 'Siap Ambil',
+                  statusColor: Colors.green,
+                  step: 3,
+                  iconColor: Colors.green,
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildTabButton(String title, bool isSelected) {
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 4),
+      padding: const EdgeInsets.symmetric(vertical: 8),
+      decoration: BoxDecoration(
+        color: isSelected ? const Color(0xFF1E88E5) : Colors.transparent,
+        borderRadius: BorderRadius.circular(20),
+      ),
+      alignment: Alignment.center,
+      child: Text(
+        title,
+        style: TextStyle(
+          color: isSelected ? Colors.white : Colors.grey,
+          fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+        ),
+      ),
+    );
+  }
+
+  Widget _buildTrackingCard({
+    required String orderId,
+    required String date,
+    required String status,
+    required Color statusColor,
+    required int step,
+    required Color iconColor,
+  }) {
+    return Container(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(16),
+        boxShadow: [
+          BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 10, offset: const Offset(0, 5)),
+        ],
+      ),
+      child: Column(
+        children: [
+          Row(
+            children: [
+              Container(
+                padding: const EdgeInsets.all(10),
+                decoration: BoxDecoration(color: iconColor.withOpacity(0.1), borderRadius: BorderRadius.circular(12)),
+                child: Icon(Icons.shopping_basket_outlined, color: iconColor),
+              ),
+              const SizedBox(width: 16),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(orderId, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+                    const SizedBox(height: 4),
+                    Text(date, style: const TextStyle(color: Colors.grey, fontSize: 12)),
+                  ],
+                ),
+              ),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                decoration: BoxDecoration(color: statusColor.withOpacity(0.1), borderRadius: BorderRadius.circular(20)),
+                child: Text(status, style: TextStyle(color: statusColor, fontWeight: FontWeight.bold, fontSize: 12)),
+              ),
+            ],
+          ),
+          const SizedBox(height: 24),
+          _buildTimeline(step),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildTimeline(int step) {
+    return Row(
+      children: [
+        _buildTimelineStep('Dicuci', step >= 1),
+        _buildTimelineDivider(step >= 2),
+        _buildTimelineStep('Dijemur', step >= 2),
+        _buildTimelineDivider(step >= 3),
+        _buildTimelineStep('Siap Ambil', step >= 3),
+      ],
+    );
+  }
