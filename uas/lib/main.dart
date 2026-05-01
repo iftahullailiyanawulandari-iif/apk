@@ -277,3 +277,73 @@ class HomeTab extends StatelessWidget {
       ),
     );
   }
+  Widget _buildSummaryCard({required String title, required String value, required String subtitle, required Color subtitleColor}) {
+    return Container(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(16),
+        boxShadow: [
+          BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 10, offset: const Offset(0, 5)),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(title, style: const TextStyle(color: Colors.grey, fontSize: 12)),
+          const SizedBox(height: 8),
+          Text(value, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
+          const SizedBox(height: 8),
+          Text(subtitle, style: TextStyle(color: subtitleColor, fontSize: 12, fontWeight: FontWeight.w500)),
+        ],
+      ),
+    );
+  }
+}
+
+// ---------------------------------------------------------
+// 2. TRACKING TAB
+// ---------------------------------------------------------
+class TrackingTab extends StatelessWidget {
+  const TrackingTab({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: const Color(0xFFF8F9FA),
+      appBar: AppBar(
+        title: const Text('Tracking Cucian', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+        actions: [
+          IconButton(icon: const Icon(Icons.filter_list), onPressed: () {}),
+        ],
+        centerTitle: true,
+        backgroundColor: Colors.white,
+        elevation: 0,
+        iconTheme: const IconThemeData(color: Colors.black),
+      ),
+      body: Column(
+        children: [
+          Container(
+            color: Colors.white,
+            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+            child: Row(
+              children: [
+                Expanded(child: _buildTabButton('Semua', true)),
+                Expanded(child: _buildTabButton('Aktif', false)),
+                Expanded(child: _buildTabButton('Selesai', false)),
+              ],
+            ),
+          ),
+          Expanded(
+            child: ListView(
+              padding: const EdgeInsets.all(24),
+              children: [
+                _buildTrackingCard(
+                  orderId: 'Order #001',
+                  date: '12 Apr 2026, 09:00',
+                  status: 'Dicuci',
+                  statusColor: Colors.blue,
+                  step: 1,
+                  iconColor: Colors.blue,
+                ),
+                const SizedBox(height: 16),
